@@ -37,6 +37,11 @@
       <version>1.53</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.thorntail</groupId>
+	  <artifactId>arquillian</artifactId>
+	  <scope>test</scope>
+	</dependency>
   </dependencies>
   <build>
     <finalName>${project.artifactId}</finalName>
@@ -70,6 +75,15 @@
             <groupId>io.fabric8</groupId>
             <artifactId>fabric8-maven-plugin</artifactId> 
             <version>3.5.41</version>
+            <executions>
+              <execution>
+                  <id>fmp</id>
+                  <goals>
+                    <goal>resource</goal>
+                    <goal>build</goal>
+                  </goals>
+              </execution>
+            </executions>
             <configuration>
               <generator>
                 <includes>
@@ -82,7 +96,7 @@
                 </config>
               </generator>
             </configuration>
-          </plugin>     
+          </plugin>
         </plugins>
       </build>
       <properties>
