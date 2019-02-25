@@ -1,5 +1,7 @@
 package com.redhat.training.juanzu.helloworld;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import java.net.URL;
 import javax.ws.rs.client.Client;
@@ -31,9 +33,21 @@ public class HelloControllerTest {
         assertEquals("Hello World", response.readEntity(String.class));
     }
 
+
     private WebTarget getWebTarget (final String endpoint) {
         final Client client = ClientBuilder.newBuilder().build();
         return client.target(this.url.toExternalForm() + endpoint);
+    }
+
+    @Test
+    @RunAsClient
+    public void testGetRestAssured () {
+        String result = given().get("data/hello")
+                               .then()
+                               .statusCode(equalTo(200))
+                               .extract()
+                               .asString();
+        assertEquals("Hello World", result);
     }
 
 }

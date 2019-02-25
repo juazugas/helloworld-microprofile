@@ -144,3 +144,4 @@ Desktop.ini
 ######################
 .eslintcache
 .h2.server.properties
+.thorntail-runner-cache/

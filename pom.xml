@@ -15,10 +15,20 @@
     <dependency>
       <groupId>org.eclipse.microprofile</groupId>
       <artifactId>microprofile</artifactId>
-      <version>2.1</version>
+      <version>2.2</version>
       <type>pom</type>
       <scope>provided</scope>
     </dependency>
+	<dependency>
+		<groupId>io.thorntail</groupId>
+		<artifactId>cdi</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>io.thorntail</groupId>
+		<artifactId>thorntail-runner</artifactId>
+		<version>${version.thorntail}</version>
+	</dependency>
+    
     <dependency>
       <groupId>com.nimbusds</groupId>
       <artifactId>nimbus-jose-jwt</artifactId>
@@ -42,6 +52,33 @@
 	  <artifactId>arquillian</artifactId>
 	  <scope>test</scope>
 	</dependency>
+
+	<!-- TESTING LIBRARIES -->
+	<dependency>
+		<groupId>com.github.tomakehurst</groupId>
+		<artifactId>wiremock-standalone</artifactId>
+		<version>2.21.0</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-core</artifactId>
+		<version>2.24.5</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>io.rest-assured</groupId>
+		<artifactId>rest-assured</artifactId>
+		<version>3.3.0</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.hamcrest</groupId>
+		<artifactId>hamcrest-library</artifactId>
+		<version>2.1</version>
+		<scope>test</scope>
+	</dependency>
+	
   </dependencies>
   <build>
     <finalName>${project.artifactId}</finalName>
@@ -75,6 +112,7 @@
             <groupId>io.fabric8</groupId>
             <artifactId>fabric8-maven-plugin</artifactId> 
             <version>3.5.41</version>
+            <!-- 
             <executions>
               <execution>
                   <id>fmp</id>
@@ -84,6 +122,7 @@
                   </goals>
               </execution>
             </executions>
+             -->
             <configuration>
               <generator>
                 <includes>
