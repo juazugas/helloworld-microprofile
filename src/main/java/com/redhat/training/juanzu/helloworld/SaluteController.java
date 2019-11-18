@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import com.redhat.training.juanzu.helloworld.json.OfficerParser;
 import com.redhat.training.juanzu.helloworld.salute.Officer;
 
 @Path("/salute")
@@ -30,6 +31,9 @@ public class SaluteController {
     @ConfigProperty(name = "officerObject", defaultValue = "{}")
     private Officer officerObject;
 
+	@Inject
+	private OfficerParser parser;
+
     @GET
     public String attention () {
         return "Attention";
@@ -42,6 +46,14 @@ public class SaluteController {
                 + Optional.ofNullable(officer)
                           .orElseGet( () -> config.getOptionalValue("officer", String.class).orElse("in the room"));
     }
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String attentionOfficerFromParam (String officer) {
+		return attention() + ", officer "
+					+ Optional.ofNullable(officer).map(parser::parse).map(Officer::toString).orElse("in the room");
+	}
 
     @POST
     @Path("byproperty")

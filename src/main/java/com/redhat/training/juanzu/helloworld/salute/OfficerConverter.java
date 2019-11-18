@@ -1,24 +1,18 @@
 package com.redhat.training.juanzu.helloworld.salute;
 
-import java.io.IOException;
+import java.util.Optional;
+import java.util.function.Predicate;
 import org.eclipse.microprofile.config.spi.Converter;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.redhat.training.juanzu.helloworld.json.OfficerParser;
 
 public class OfficerConverter implements Converter<Officer> {
 
-    private ObjectMapper mapper = new ObjectMapper();
+	private OfficerParser parser = new OfficerParser();
+	private Predicate<String> emptyValue = v -> v.trim().equals("");
 
     @Override
     public Officer convert (String value) {
-        if (null == value || value.trim().equals("")) {
-            return null;
-        }
-        try {
-            return mapper.readValue(value, Officer.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+		return Optional.ofNullable(value).filter(emptyValue.negate()).map(parser::parse).orElse(null);
     }
 
 }
