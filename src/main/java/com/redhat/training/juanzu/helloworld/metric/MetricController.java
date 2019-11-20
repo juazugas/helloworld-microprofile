@@ -1,7 +1,7 @@
 package com.redhat.training.juanzu.helloworld.metric;
 
 import java.util.Random;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,7 +12,7 @@ import org.eclipse.microprofile.metrics.annotation.Metric;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
 @Path("/metric")
-@RequestScoped
+@ApplicationScoped
 public class MetricController {
 
     @Inject

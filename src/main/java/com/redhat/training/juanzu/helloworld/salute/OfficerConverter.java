@@ -7,12 +7,12 @@ import com.redhat.training.juanzu.helloworld.json.OfficerParser;
 
 public class OfficerConverter implements Converter<Officer> {
 
-	private OfficerParser parser = new OfficerParser();
-	private Predicate<String> emptyValue = v -> v.trim().equals("");
+    private OfficerParser parser = new OfficerParser();
+    private Predicate<String> emptyValue = v -> v.trim().equals("");
 
     @Override
     public Officer convert (String value) {
-		return Optional.ofNullable(value).filter(emptyValue.negate()).map(parser::parse).orElse(null);
+        return Optional.ofNullable(value).filter(emptyValue.negate()).map(parser::parse).orElse(null);
     }
 
 }
