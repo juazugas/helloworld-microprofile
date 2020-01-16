@@ -38,8 +38,7 @@ public class SaluteController {
     @ConfigProperty(name = "officerObject", defaultValue = "{}")
     private Officer officerObject;
 
-	@Inject
-	private OfficerParser parser;
+    private OfficerParser parser = new OfficerParser();
 
     @Inject
     @Named("SalutationLogDAO")
